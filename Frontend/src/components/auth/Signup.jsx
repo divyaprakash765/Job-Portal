@@ -5,7 +5,7 @@ import { Input } from "../ui/input";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Button } from "../ui/button";
 
-const Signup = () => {
+const Signup = () => {  
   return (
     <div>
       <Navbar />
