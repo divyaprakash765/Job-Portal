@@ -24,7 +24,7 @@ const Navbar = () => {
             <li>Browse</li>
           </ul>
           {!user ? (
-            <div>
+            <div className="flex gap-5">
                 <Link to = "/login"><Button variant="outline">Login</Button></Link>
               <Link to = "/signup"><Button>signup</Button></Link>
             </div>
