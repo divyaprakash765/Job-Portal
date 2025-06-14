@@ -1,1 +1,17 @@
-node_modules
+# Frontend
+Frontend/node_modules/
+Frontend/dist/
+
+# Backend
+Backend/node_modules/
+Backend/dist/
+
+# System / IDE files
+.vscode/
+*.log
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
