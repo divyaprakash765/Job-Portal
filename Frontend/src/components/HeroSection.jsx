@@ -23,7 +23,7 @@ const HeroSection = () => {
             placeholder="find your dream jobs"
             className="outline-none border-none w-full"
           />
-          <Button className = 'rounded-r-full'>
+          <Button className = 'bg-[#AA08D2] rounded-r-full'>
             <Search className="h-5 w-5"/>
           </Button>
         </div>
