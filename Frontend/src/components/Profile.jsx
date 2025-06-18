@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./ui/Navbar";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
@@ -6,11 +6,13 @@ import {  Contact, Mail, Pen } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Label } from "./ui/label";
 import AppliedJobTable from "./AppliedJobTable";
+import UpdateProfileDialog from "./UpdateProfileDialog";
 
 const skills = ["HTML", "CSS", "JavaScript", "React", "Node.js"];
-const isResumeAvailable = true; 
+const isResumeAvailable = true;
 
 const Profile = () => {
+  const [open,setOpen] = useState(false); 
   return (
     <div>
       <Navbar />
@@ -32,7 +34,7 @@ const Profile = () => {
               </p>
             </div>
           </div>
-          <Button className="text-right" variant="outline">
+          <Button onClick={() => setOpen(true)} className="" variant="outline">
             <Pen />
           </Button>
         </div>
@@ -64,6 +66,7 @@ const Profile = () => {
        <AppliedJobTable />
       </div>
       </div>
+      <UpdateProfileDialog open={open} setOpen={setOpen} />
     </div>
   );
 };
