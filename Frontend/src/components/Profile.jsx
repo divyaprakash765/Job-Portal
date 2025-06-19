@@ -7,12 +7,15 @@ import { Badge } from "./ui/badge";
 import { Label } from "./ui/label";
 import AppliedJobTable from "./AppliedJobTable";
 import UpdateProfileDialog from "./UpdateProfileDialog";
+import { useSelector } from "react-redux";
 
-const skills = ["HTML", "CSS", "JavaScript", "React", "Node.js"];
+// const skills = ["HTML", "CSS", "JavaScript", "React", "Node.js"];
 const isResumeAvailable = true;
 
 const Profile = () => {
   const [open,setOpen] = useState(false); 
+   const {user} = useSelector(store => store.auth);
+
   return (
     <div>
       <Navbar />
@@ -27,10 +30,9 @@ const Profile = () => {
             </Avatar>
 
             <div>
-              <h1 className="font-md text-xl">Full name</h1>
+              <h1 className="font-md text-xl">{user?.fullname}</h1>
               <p className="text-gray-700 text-sm">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. At
-                quam minus reprehenderit nostrum fugit.
+                {user?.profile?.bio}
               </p>
             </div>
           </div>
@@ -41,17 +43,17 @@ const Profile = () => {
         <div>
         <div className="flex items-center gap-2">
           <Mail />
-          <span>divya@gmail.com</span>
+          <span>{user?.email}</span>
         </div>
         <div className="flex items-center gap-2">
           <Contact />
-          <span>+1 234 567 890</span>
+          <span>{user?.phoneNumber}</span>
         </div>
       </div>
-      <div>
+      <div className="">
         <h1>Skills</h1>
         {
-         skills.length > 0 ? skills.map((item,idx)=>(<Badge className='mr-2' key={idx}>{item}</Badge>)) : <p className="text-sm font-md">No skills available</p>
+         user?.profile?.skills.length > 0 ? user?.profile?.skills.map((item,idx)=>(<Badge key={idx}>{item}</Badge>)) : <p className="text-sm font-md">No skills available</p>
         }
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
