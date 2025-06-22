@@ -59,7 +59,7 @@ const Profile = () => {
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label className = "text-md font-bold">Resume</Label>
         {
-          isResumeAvailable ? <a target ="_blank" href="https://example.com/resume.pdf" className="text-blue-500 hover:underline">Download Resume</a> : <p className="text-sm font-md">No resume available</p>
+          isResumeAvailable ? <a target ="_blank" href={user?.profile?.resume} className="text-blue-500 hover:underline">{user?.profile?.resumeOriginalName}</a> : <p className="text-sm font-md">No resume available</p>
         }
       </div>
       <div className="max-w-4xl mx-auto bg-white rounded-2xl">
