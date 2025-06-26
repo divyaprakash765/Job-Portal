@@ -39,7 +39,7 @@ const Signup = () => {
     formData.append("fullname",input.fullname);
     formData.append("email",input.email);
     formData.append("phoneNumber",input.phoneNumber);
-    formData.append("password",input.fullname);
+    formData.append("password",input.password);
     formData.append("role",input.role);
     if(input.file){
     formData.append("file",input.file)
@@ -124,7 +124,7 @@ const Signup = () => {
                 <input
                   type="radio"
                   name="role"
-                  value="Recruiter"
+                  value="recruiter"
                   checked = {input.role === 'recruiter'}
                   onChange={changeEventHandler}
                   className="cursor-pointer"

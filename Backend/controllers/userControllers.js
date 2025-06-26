@@ -4,73 +4,76 @@ import jwt from "jsonwebtoken";
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
 
-export const register = async (req,res)=>{
+export const register = async (req, res) => {
     try {
-        const {fullname, email,phoneNumber,password,role} = req.body;
-        if(!fullname || !email || !phoneNumber || !password || !role){
+        const { fullname, email, phoneNumber, password, role } = req.body;
+         
+        if (!fullname || !email || !phoneNumber || !password || !role) {
             return res.status(400).json({
-                message : "something is missing",
+                message: "Something is missing",
                 success: false
-            })
+            });
         };
         const file = req.file;
         const fileUri = getDataUri(file);
         const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
-        const user = await User.findOne({email});
-        if(user){
+
+        const user = await User.findOne({ email });
+        if (user) {
             return res.status(400).json({
-              message: "user already exist with this email",
-              success: false
+                message: 'User already exist with this email.',
+                success: false,
             })
         }
-        const hashedPassword = await bcrypt.hash(password,10);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         await User.create({
             fullname,
             email,
             phoneNumber,
-            password:hashedPassword,
+            password: hashedPassword,
             role,
-            profile: {
-                profilePhoto: cloudResponse.secure_url,
+            profile:{
+                profilePhoto:cloudResponse.secure_url,
             }
         });
+
         return res.status(201).json({
-            message: "Account Created Succesfully",
+            message: "Account created successfully.",
             success: true
-        })
+        });
     } catch (error) {
         console.log(error);
     }
 }
-
-export const login = async (req,res)=>{
+export const login = async (req, res) => {
     try {
-        const {email,password,role} = req.body;
-         if(!password || !email || !role){
+        const { email, password, role } = req.body;
+        
+        if (!email || !password || !role) {
             return res.status(400).json({
-                message : "something is missing",
+                message: "Something is missing",
                 success: false
-            })
+            });
         };
-        let user = await User.findOne({email});
-        if(!user){
+        let user = await User.findOne({ email });
+        if (!user) {
             return res.status(400).json({
-              message: "Incorrect email or password",
-              succes: false
+                message: "Incorrect email or password.",
+                success: false,
             })
-        };
-        const isPasswordMatch = await bcrypt.compare(password,user.password);
-        if(!isPasswordMatch){
-             return res.status(400).json({
-              message: "Incorrect email or password",
-              succes: false
+        }
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        if (!isPasswordMatch) {
+            return res.status(400).json({
+                message: "Incorrect email or password.",
+                success: false,
             })
         };
         // check role is correct or not
-        if(role != user.role){
+        if (role !== user.role) {
             return res.status(400).json({
-                message: "user doesn't exist with current role.",
+                message: "Account doesn't exist with current role.",
                 success: false
             })
         };
@@ -78,10 +81,10 @@ export const login = async (req,res)=>{
         const tokenData = {
             userId: user._id
         }
-        const token = await jwt.sign(tokenData, process.env.SECRET_KEY,{expiresIn:'1d'});
+        const token = await jwt.sign(tokenData, process.env.SECRET_KEY, { expiresIn: '1d' });
 
         user = {
-            _id:user._id,
+            _id: user._id,
             fullname: user.fullname,
             email: user.email,
             phoneNumber: user.phoneNumber,
@@ -89,12 +92,11 @@ export const login = async (req,res)=>{
             profile: user.profile
         }
 
-         return res.status(200).cookie("token",token, {maxAge:1*24*60*60*1000, httpsOnly: true, sameSite: 'strict'}).json({
-            message: `Welcome Back ${user.fullname}`,
+        return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpsOnly: true, sameSite: 'strict' }).json({
+            message: `Welcome back ${user.fullname}`,
             user,
             success: true
-         })
-
+        })
     } catch (error) {
         console.log(error);
     }
