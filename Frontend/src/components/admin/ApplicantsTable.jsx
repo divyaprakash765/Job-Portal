@@ -84,7 +84,11 @@ const ApplicantsTable = () => {
                           <div
                             onClick={() => statusHandler(status, item?._id)}
                             key={index}
-                            className={`flex px-2 py-1 rounded-md ${status === "Accepted" ? "bg-green-500" : "bg-red-500"} w-fit items-center my-2 cursor-pointer`}
+                            className={`flex px-2 py-1 rounded-md ${
+                              status === "Accepted"
+                                ? "bg-green-500"
+                                : "bg-red-500"
+                            } w-fit items-center my-2 cursor-pointer`}
                           >
                             <span>{status}</span>
                           </div>
