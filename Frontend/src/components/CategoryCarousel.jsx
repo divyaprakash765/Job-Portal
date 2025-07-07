@@ -1,7 +1,7 @@
 import React from 'react'
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from './ui/carousel'
 import { Button } from './ui/button'
-import { setSearchQuery } from '../redux/jobSlice'
+import { setSearchedQuery } from '../redux/jobSlice'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -18,7 +18,7 @@ const CategoryCarousel = () => {
   const navigate = useNavigate();
 
   const searchJobHandler = (query)=>{
-      dispatch(setSearchQuery(query));
+      dispatch(setSearchedQuery(query));
       navigate("/browse");
     }
 

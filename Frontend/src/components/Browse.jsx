@@ -3,7 +3,7 @@ import Navbar from './ui/Navbar';
 import Job from './Job';
 import { useDispatch, useSelector } from 'react-redux';
 import useGetAllJobs from '../hooks/useGetAllJobs';
-import { setSearchQuery } from '../redux/jobSlice';
+import { setSearchedQuery } from '../redux/jobSlice';
 
 
 const Browse = () => {
@@ -12,7 +12,7 @@ const Browse = () => {
     const dispatch = useDispatch();
     useEffect(()=>{
         return ()=>{
-            dispatch(setSearchQuery(""));
+            dispatch(setSearchedQuery(""));
         }
     },[])
     return (
