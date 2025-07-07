@@ -3,7 +3,7 @@ Frontend/node_modules/
 Frontend/dist/
 
 # Backend
-Backend/node_modules/
+node_modules/
 Backend/dist/
 
 # System / IDE files
