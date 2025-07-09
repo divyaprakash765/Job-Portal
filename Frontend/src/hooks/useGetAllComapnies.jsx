@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 
 const useGetAllCompanies = () => {
     const dispatch = useDispatch();
-    useEffect(()=>{
+    useEffect(()=>{ 
         const fetchCompanies = async () => {
             try {
                 const res = await axios.get(`${COMPANY_API_END_POINT}/get`,{withCredentials:true});
