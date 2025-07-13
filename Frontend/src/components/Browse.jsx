@@ -17,11 +17,16 @@ const Browse = () => {
     }, []);
 
     const filteredJobs = searchedQuery
-        ? allJobs.filter(job =>
-            job.title.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-            job.company.toLowerCase().includes(searchedQuery.toLowerCase())
-        )
-        : allJobs;
+  ? allJobs.filter(job => {
+      const title = typeof job.title === "string" ? job.title : "";
+      const company = typeof job.company === "string" ? job.company : "";
+      
+      return (
+        title.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+        company.toLowerCase().includes(searchedQuery.toLowerCase())
+      );
+    })
+  : allJobs;
 
     return (
         <div>
