@@ -77,7 +77,7 @@ const Login = () => {
               value={input.email}
               name="email"
               onChange={changeEventHandler}
-              placeholder="patel@gmail.com"
+              placeholder="divya@gmail.com"
               required
               aria-label="Email"
             />
